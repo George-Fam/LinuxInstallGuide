@@ -1,30 +1,8 @@
 # Linux Install Guide - EN
 
 ### Table of Contents
-- [Prep](#prep)
-	- [VM](#vm)
-		- [Windows](#windows)
-		- [Mac](#mac)
-	- [Dual/Single Boot](#dualsingle-boot)
-- [Intel RST](#intel-rst)
-	- [Disabling RST](#disabling-rst)
-- [BitLocker](#bitlocker)
-- [Internet](#internet)
-- [Debian Installation](#debian-installation)
-- [Custom Partitioning (Optional / Dual Boot)](#custom-partitioning-optional--dual-boot)
-	- [Partition Scheme](#partition-scheme)
-	- [Dual Boot](#dual-boot)
-		- [Recommended Guides](#recommended-guides)
-- [Graphics Drivers](#graphics-drivers)
-- [Printers (UQAM Setup)](#printers-uqam-setup)
-- [Debian Root & Sudo](#debian-root--sudo)
-- [Installation of VirtualBox Guest Additions (Only on VM)](#installation-of-virtualbox-guest-additions-only-on-vm)
-- [Common Errors](#common-errors)
-	- [No Mirrors Available](#no-mirrors-available)
-	- [Wrong Shell (sh instead of bash)](#wrong-shell-sh-instead-of-bash)
-	- [VirtualBox Dependencies (Visual C++)](#virtualbox-dependencies-visual-c)
-	- [Wrong Username](#wrong-username)
-	- [Troubleshooting Boot Issues (Secure Boot)](#troubleshooting-boot-issues-secure-boot)
+<!-- START doctoc -->
+<!-- END doctoc -->
 ### Prep
 #### VM
 ##### Windows

@@ -1,30 +1,7 @@
 # Guide d'Installation Linux - FR
 ### Table des matières
-- [Préparation](#préparation)
-    - [Machine virtuelle (VM)](#machine-virtuelle-vm)
-        - [Windows](#windows)   
-        - [Mac](#mac)    
-    - [Dual Boot ou installation unique](#dual-boot-ou-installation-unique)
-- [Intel RST](#intel-rst)
-    - [Désactivation de RST](#désactivation-de-rst)
-- [BitLocker](#bitlocker)
-- [Internet](#internet)
-- [Installation de Debian](#installation-de-debian)
-- [Partitionnement personnalisé (optionnel / dual boot)](#partitionnement-personnalisé-optionnel--dual-boot)
-    - [Schéma de partition](#schéma-de-partition)    
-    - [Dual Boot](#dual-boot)    
-        - [Guides recommandés](#guides-recommand%C3%A9s)      
-- [Pilotes graphiques](#pilotes-graphiques)
-- [Imprimantes (configuration UQAM)](#imprimantes-configuration-uqam)
-- [Debian root & sudo](#debian-root--sudo)
-- [Installation des Additions invité VirtualBox (VM uniquement)](#installation-des-additions-invit%C3%A9-virtualbox-vm-uniquement)
-- [Erreurs fréquentes](#erreurs-fr%C3%A9quentes) 
-    - [Aucun miroir disponible](#aucun-miroir-disponible)
-    - [Ancienne commande usermod](#ancienne-commande-usermod)
-    - [Mauvais shell (sh au lieu de bash)](#mauvais-shell-sh-au-lieu-de-bash)
-    - [Dépendances Visual C++ VirtualBox](#d%C3%A9pendances-visual-c-virtualbox)
-    - [Mauvais nom d'utilisateur](#mauvais-nom-dutilisateur)
-    - [Problèmes de démarrage (Secure Boot)](#probl%C3%A8mes-de-d%C3%A9marrage-secure-boot)
+<!-- START doctoc -->
+<!-- END doctoc -->
 ### Préparation
 #### Machine virtuelle (VM)
 ##### Windows
