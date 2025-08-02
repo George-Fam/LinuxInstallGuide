@@ -1,7 +1,35 @@
 # Guide d'Installation Linux - FR
 ### Table des matières
-<!-- START doctoc -->
-<!-- END doctoc -->
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+- [Préparation](#pr%C3%A9paration)
+  - [Machine virtuelle (VM)](#machine-virtuelle-vm)
+    - [Windows](#windows)
+    - [Mac](#mac)
+  - [Dual Boot ou installation unique](#dual-boot-ou-installation-unique)
+- [Intel RST](#intel-rst)
+  - [Désactivation de RST](#d%C3%A9sactivation-de-rst)
+- [BitLocker](#bitlocker)
+- [Internet](#internet)
+- [Installation de Debian](#installation-de-debian)
+- [Partitionnement personnalisé (optionnel / dual boot)](#partitionnement-personnalis%C3%A9-optionnel--dual-boot)
+  - [Schéma de partition](#sch%C3%A9ma-de-partition)
+  - [Dual Boot](#dual-boot)
+    - [Guides recommandés](#guides-recommand%C3%A9s)
+- [Pilotes graphiques](#pilotes-graphiques)
+- [Imprimantes (configuration UQAM)](#imprimantes-configuration-uqam)
+- [Debian root & sudo](#debian-root--sudo)
+- [Installation des Additions invité VirtualBox (VM uniquement)](#installation-des-additions-invit%C3%A9-virtualbox-vm-uniquement)
+- [Erreurs fréquentes](#erreurs-fr%C3%A9quentes)
+  - [Aucun miroir disponible](#aucun-miroir-disponible)
+  - [Ancienne commande usermod](#ancienne-commande-usermod)
+  - [Mauvais shell (sh au lieu de bash)](#mauvais-shell-sh-au-lieu-de-bash)
+  - [Dépendances Visual C++ VirtualBox](#d%C3%A9pendances-visual-c-virtualbox)
+  - [Mauvais nom d'utilisateur](#mauvais-nom-dutilisateur)
+  - [Problèmes de démarrage (Secure Boot)](#probl%C3%A8mes-de-d%C3%A9marrage-secure-boot)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
 ### Préparation
 #### Machine virtuelle (VM)
 ##### Windows

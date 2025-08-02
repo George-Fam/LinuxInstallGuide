@@ -1,8 +1,36 @@
 # Linux Install Guide - EN
 
 ### Table of Contents
-<!-- START doctoc -->
-<!-- END doctoc -->
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+- [Prep](#prep)
+  - [VM](#vm)
+    - [Windows](#windows)
+    - [Mac](#mac)
+  - [Dual/Single Boot](#dualsingle-boot)
+- [Intel RST](#intel-rst)
+  - [Disabling RST](#disabling-rst)
+- [BitLocker](#bitlocker)
+- [Internet](#internet)
+- [Debian Installation](#debian-installation)
+- [Custom Partitioning (Optional / Dual Boot)](#custom-partitioning-optional--dual-boot)
+  - [Partition Scheme](#partition-scheme)
+  - [Dual Boot](#dual-boot)
+    - [Recommended Guides](#recommended-guides)
+- [Graphics Drivers](#graphics-drivers)
+- [Printers (UQAM Setup)](#printers-uqam-setup)
+- [Debian Root & Sudo](#debian-root--sudo)
+- [Installation of Virtualbox Guest Additions (only on VM)](#installation-of-virtualbox-guest-additions-only-on-vm)
+- [Common Errors](#common-errors)
+  - [No Mirrors Available](#no-mirrors-available)
+  - [Old usermod command](#old-usermod-command)
+  - [Wrong shell (sh instead of bash)](#wrong-shell-sh-instead-of-bash)
+  - [VirtualBox Dependencies (Visual C++)](#virtualbox-dependencies-visual-c)
+  - [Wrong Username](#wrong-username)
+  - [Troubleshooting Boot Issues (Secure Boot)](#troubleshooting-boot-issues-secure-boot)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
 ### Prep
 #### VM
 ##### Windows
