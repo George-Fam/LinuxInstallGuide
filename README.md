@@ -20,8 +20,8 @@ This guide was created to support the **Linux Install Party (Party d’installat
 
 | Language | Link                              |
 | -------- | --------------------------------- |
-| English  | [`Guide (EN)`](./Guide%20(EN).md) |
-| French   | [`Guide (FR)`](./Guide%20(FR).md) |
+| English  | [`Guide (EN)`](./Guide.md)        |
+| French   | [`Guide (FR)`](./Guide.fr.md)     |
 
 ## Before You Start
 

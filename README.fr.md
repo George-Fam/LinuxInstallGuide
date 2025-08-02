@@ -19,8 +19,8 @@ Ce guide a été créé pour soutenir le **Party d’installation Linux**, organ
 
 | Language | Link                              |
 | -------- | --------------------------------- |
-| Anglais  | [`Guide (EN)`](./Guide%20(EN).md) |
-| Français | [`Guide (FR)`](./Guide%20(FR).md) |
+| Anglais  | [`Guide (EN)`](./Guide.md)        |
+| Français | [`Guide (FR)`](./Guide.fr.md)     |
 
 ## Avant de commencer
 
