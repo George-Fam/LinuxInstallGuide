@@ -40,7 +40,6 @@
 See this [Microsoft](https://support.microsoft.com/en-us/windows/enable-virtualization-on-windows-c5578302-6e43-4b4b-a449-8ced115f58e1) article for more details.
 ##### Mac
 Recent Macs support virtualization by default.
-- For Intel Macs : La virtualisation est activée automatiquement.
 - For Apple Silicon Macs :
    - You must download the **ARM** image of your preferred Linux distribution instead of the standard **x86 (amd64)** version.
    - [Debian ARM Image](https://cdimage.debian.org/debian-cd/current/arm64/iso-cd/)
