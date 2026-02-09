@@ -51,7 +51,7 @@ Les Mac récents prennent en charge la virtualisation par défaut.
     - Assurez-vous d'avoir au moins 20–30 Go d'espace libre sur votre disque (HDD/SSD).
     - Faites une sauvegarde complète de vos fichiers importants.
 2. **Choix de distribution :**
-    - **Debian 12** est recommandée pour le cours _INF1070_.
+    - **Debian 13** est recommandée pour le cours _INF1070_.
     - Si votre matériel est très récent (ex. portables de jeu), envisagez une distribution **rolling-release** ou **semi-rolling** comme [_Debian Unstable_](https://wiki.debian.org/fr/DebianUnstable), [Arch Linux](https://archlinux.org/), [Manjaro](https://manjaro.org/), [Fedora](https://fedoraproject.org/), etc.
 3. **Créer une clé USB bootable** avec [Rufus](https://rufus.ie/en/) ou un outil similaire (ex. Etcher pour macOS/Linux).
     - Guides pour le dual-boot :
@@ -134,7 +134,7 @@ Si vous ne souhaitez pas utiliser tout le disque ou si vous installez Debian aux
 - [Guide Arch pour le dual boot](https://wiki.archlinux.org/title/Dual_boot_with_Windows_(Fran%C3%A7ais)) (disponible en [anglais](https://wiki.archlinux.org/title/Dual_boot_with_Windows) et en français)
 	- Très détaillé et pertinent pour toutes les distributions Linux.
 ### Pilotes graphiques
-- Suivez le [Wiki Debian Nvidia](https://wiki.debian.org/fr/NvidiaGraphicsDrivers#Debian_12_.2BAKs_Bookworm_.2BALs-) pour les instructions d'installation.
+- Suivez le [Wiki Debian Nvidia](https://wiki.debian.org/fr/NvidiaGraphicsDrivers#Debian_13_.2BAKs_Trixie_.2BALs-) pour les instructions d'installation.
 ### Imprimantes (configuration UQAM)
 - Suivez le [guide de Ryan Kavanagh](https://rak.ac/blog/2024-01-17-imprimer-sous-linux-uqam-informatique/) pour imprimer à l'UQAM.
 - Infos supplémentaires pour UQAM :
@@ -154,46 +154,40 @@ apt install sudo # Peut être déjà installé
 usermod -aG sudo nomUtilisateur
 ```
 ### Installation des Additions invité VirtualBox (VM uniquement)
-Pour une meilleure intégration VM (résolution, souris, etc.), suivez le [guide Debian](https://wiki.debian.org/VirtualBox#Debian_10_.22Buster.22.2C_Debian_11_.22Bullseye.22.2C_and_Debian_12_.22Bookworm.22-1) :
+Pour une meilleure intégration VM (résolution, souris, etc.), installez les Additions invité VirtualBox.
+1. Dans le menu VirtualBox (fenêtre de la VM):
+   - Périphériques -> Insérer l'image CD des Additions invités.
+   - Le CD sera monté automatiquement dans Debian.
+2. L'exécution automatique sera proposée:
+   - Cliquez sur Exécuter et entrez votre mot de passe quand demandé
 
-```sh
-# Ajouter Debian Fast-Track
-sudo apt install lsb-release
-echo "deb http://deb.debian.org/debian $(lsb_release -cs)-backports main contrib" |
-sudo tee /etc/apt/sources.list.d/backports.list
-sudo apt install fasttrack-archive-keyring
-echo "deb http://fasttrack.debian.net/debian-fasttrack/ $(lsb_release -cs)-fasttrack main contrib" |
-sudo tee /etc/apt/sources.list.d/fasttrack.list
-echo "deb http://fasttrack.debian.net/debian-fasttrack/ $(lsb_release -cs)-backports-staging main contrib" |
-sudo tee -a /etc/apt/sources.list.d/fasttrack.list
-sudo apt update
-
-# Installer les Additions invité
-sudo apt install virtualbox-guest-x11 virtualbox-guest-utils
-```
 ### Erreurs fréquentes
 #### Aucun miroir disponible
-1. Si vous avez utilisé l'image DVD ou que vous n'avez pas sélectionné de miroir (ex. deb.debian.org), 
-	- Vous verrez peut-être une erreur :
-	    - `The repository 'cdrom://[Debian GNU/Linux 12.1.0 ...] bookworm Release' does not have a Release file.`    
-2. Exécutez `cat /etc/apt/sources.list` — si vous voyez une ligne avec `cdrom://`, modifiez le fichier :
-3. Access `sources.list` with nano *(or other text editor)* using  sudo or root. 
-	- `sudo nano /etc/apt/sources.list` or 
-	- `su -l` and then `nano /etc/apt/sources.list`
-4. Remplacez tout le contenu par :
+1. Si vous avez utilisé l'image DVD ou que vous n'avez pas sélectionné de miroir (ex. deb.debian.org),
+   - Vous verrez peut-être une erreur :
+     - `The repository 'cdrom://[Debian GNU/Linux 13.0.0 ...] trixie Release' does not have a Release file.`
+2. Effacez `sources.list` en tant que sudo ou root:
+   - `sudo rm /etc/apt/sources.list` ou
+   - `su -l` et puis `rm /etc/apt/sources.list`
+3. Ajoutez un fichier `/etc/apt/sources.list.d/debian.sources` avec votre un éditeur de texte:
 
 ```sh
-deb https://deb.debian.org/debian bookworm main non-free-firmware
-deb-src https://deb.debian.org/debian bookworm main non-free-firmware
+Types: deb deb-src
+URIs: https://deb.debian.org/debian
+Suites: trixie trixie-updates
+Components: main contrib non-free non-free-firmware
+Enabled: yes
+Signed-By: /usr/share/keyrings/debian-archive-keyring.gpg
 
-deb https://security.debian.org/debian-security bookworm-security main non-free-firmware
-deb-src https://security.debian.org/debian-security bookworm-security main non-free-firmware
-
-deb https://deb.debian.org/debian bookworm-updates main non-free-firmware
-deb-src https://deb.debian.org/debian bookworm-updates main non-free-firmware
+Types: deb deb-src
+URIs: https://security.debian.org/debian-security
+Suites: trixie-security
+Components: main contrib non-free non-free-firmware
+Enabled: yes
+Signed-By: /usr/share/keyrings/debian-archive-keyring.gpg
 ```
-
-#### Ancienne commande usermod 
+4. Mettre à jour la liste des paquets : `sudo apt update`
+#### Ancienne commande usermod
 - Si `su -c "usermod -aG sudo $USER"` échoue : 
 	- utilisez `su -l` puis `usermod -aG sudo nomUtilisateur`
 #### Mauvais shell (sh au lieu de bash)
