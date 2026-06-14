@@ -205,3 +205,9 @@ sudo usermod -aG sudo username
 ```
 #### Troubleshooting Boot Issues (Secure Boot)
 - **Stuck at boot after install**:  Try disabling Secure Boot in BIOS if your Linux doesn’t boot properly after installation.
+
+### Further Reading
+
+- **[The Linux Desktop Guide](https://thelinuxbook.com)** by Chris Titus.
+  - A practical guide covering desktop Linux topics that most installation guides don’t touch: terminal usage, networking, audio, bluetooth, drives, gaming, environment setup, and more. Not required reading, but a great resource if you want to go beyond installation and really learn how to use your Linux desktop day-to-day.
+  - Not overly detailed; the [Arch Wiki](https://wiki.archlinux.org/) remains your best friend for in-depth references.

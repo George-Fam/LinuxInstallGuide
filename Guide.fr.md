@@ -208,3 +208,8 @@ sudo usermod -aG sudo nomUtilisateur
 ```
 #### Problèmes de démarrage (Secure Boot)
 - **Bloqué au démarrage après l'installation** : désactivez Secure Boot dans le BIOS si Linux ne démarre pas correctement.
+
+### Pour aller plus loin
+- **[The Linux Desktop Guide](https://thelinuxbook.com)** de Chris Titus
+  - Un guide pratique couvrant des sujets de bureau Linux que la plupart des guides d’installation ne traitent pas : utilisation du terminal, réseau, audio, bluetooth, disques, jeux, configuration de l’environnement, etc. Pas une lecture obligatoire, mais une excellente ressource si vous voulez aller au-delà de l’installation et apprendre vraiment à utiliser votre bureau Linux au quotidien. 
+  - Pas trop détaillé; le [Arch Wiki](https://wiki.archlinux.org/) reste votre meilleur ami pour des références en profondeur.
