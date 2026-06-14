@@ -1,6 +1,6 @@
 # Guide d'installation Linux à l'UQAM
 
-[![en](https://img.shields.io/badge/lang-en-blue.svg)](https://github.com/George-Fam/LinuxInstallGuide/blob/master/README.md) [![fr](https://img.shields.io/badge/lang-fr-brightgreen.svg)](https://github.com/George-Fam/LinuxInstallGuide/blob/master/README.fr.md)
+[![en](https://img.shields.io/badge/lang-en-blue.svg)](https://github.com/George-Fam/LinuxInstallGuide/blob/main/README.md) [![fr](https://img.shields.io/badge/lang-fr-brightgreen.svg)](https://github.com/George-Fam/LinuxInstallGuide/blob/main/README.fr.md)
 
 Ce guide a été créé pour soutenir le **Party d’installation Linux**, organisé chaque session afin d’aider les nouveaux étudiants à installer Linux - que ce soit dans une machine virtuelle ou en dual boot.
 
