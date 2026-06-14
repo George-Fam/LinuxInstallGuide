@@ -3,6 +3,7 @@
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
+- [Par où commencer ?](#par-o%C3%B9-commencer-)
 - [Préparation](#pr%C3%A9paration)
   - [Machine virtuelle (VM)](#machine-virtuelle-vm)
     - [Windows](#windows)
