@@ -31,6 +31,27 @@
 - [Pour aller plus loin](#pour-aller-plus-loin)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
+### Par où commencer ?
+
+```
+Qu'est-ce que vous installez ?
+├── Machine virtuelle (VM) ────────────────────────────────────────────────────┐
+│   ├── Hôte Windows -> activer la virtualisation -> Préparation › VM › Windows  │
+│   └── Hôte Mac     -> UTM (Apple Silicon) ou VirtualBox -> Préparation › VM › Mac│
+│                                                                              │
+│   Ensuite, allez directement à : Installation de Debian -> Additions invité  │
+│   (Ignorez Intel RST, BitLocker et le partitionnement personnalisé)         │
+│                                                                              │
+└── Dual Boot / installation unique (directement sur votre machine) ───────────┘
+    ├── Machine Windows ?
+    │   ├── Vérifiez Intel RST  (utilisateurs NVMe/Optane — ignorez si incertain, revenez si l'install échoue)
+    │   └── Désactivez BitLocker avant de réduire votre partition
+    │
+    ├── Préparation › Dual Boot  ->  Partitionnement personnalisé  ->  Installation de Debian
+    └── Après l'installation : Pilotes graphiques (Nvidia), Imprimantes, root & sudo
+```
+
 ### Préparation
 #### Machine virtuelle (VM)
 ##### Windows
@@ -47,6 +68,7 @@ Les Mac récents prennent en charge la virtualisation par défaut.
 - Utilisez [UTM](https://mac.getutm.app/) au lieu de VirtualBox.
 #### Dual Boot ou installation unique
 
+- **Ce guide suppose un système UEFI**, ce qui est le standard sur la grande majorité des ordinateurs vendus au cours des 10 dernières années. 
 - Plutôt que d’installer Linux dans une machine virtuelle, il est généralement préférable de l’installer directement sur votre machine (meilleures performances). Cela dit, l’installation directe est plus complexe et comporte des risques de perte de données. Si vous n’êtes pas à l’aise de suivre les étapes seul, utilisez une machine virtuelle pour l’instant ou assistez à la [Install Party](https://info.uqam.ca/linux/) organisée par le département d'informatique.
 1. **Préparation :**
     - Assurez-vous d'avoir au moins 20–30 Go d'espace libre sur votre disque (HDD/SSD).
@@ -59,6 +81,7 @@ Les Mac récents prennent en charge la virtualisation par défaut.
         - [Guide Debian (anglais)](https://wiki.debian.org/DualBoot/Windows)
         - [Guide Arch (anglais/français)](https://wiki.archlinux.org/title/Dual_boot_with_Windows_\(Fran%C3%A7ais\))
 ### Intel RST
+> **Attention :** Les étapes suivantes impliquent la modification du registre Windows et des paramètres du BIOS. Si vous n'êtes pas à l'aise pour le faire, apportez votre ordinateur à la [Install Party](https://info.uqam.ca/linux/) pour de l'aide guidée.
 
 - Intel RST (Rapid Storage Technology) est une technologie RAID/cache SSD propriétaire qui pose de **sérieux problèmes de compatibilité avec Linux**. Elle n'est **pas supportée** par les développeurs du noyau et **doit être désactivée**.
 - Non supporté à cause de
@@ -70,7 +93,7 @@ Les Mac récents prennent en charge la virtualisation par défaut.
 	- [Source : linux-pci mailing list](https://lore.kernel.org/linux-pci/20190620061038.GA20564@lst.de/T/)
 #### Désactivation de RST
 1. Désactivez RST dans Intel Optane s'il est installé.
-2. Essayez d'installer Ubuntu.
+2. Essayez d'installer Linux.
 3. Si cela échoue, réactivez AHCI sous Windows (si pris en charge par votre BIOS) :
     1. Ouvrez **Regedit**
     2. Allez dans :  `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\iaStorV\`
@@ -83,27 +106,27 @@ Les Mac récents prennent en charge la virtualisation par défaut.
         1. Accédez à la récupération Windows (CMD)
         2. Utilisez `diskpart` pour assigner des lettres à vos partitions
         3. `bcdedit /deletevalue {default} safeboot`
-	        - Essayez `{current}` ou sans identifiant si ça échoue)
+	        - Essayez `{current}` ou sans identifiant (si ça échoue)
 	    4. Si nécessaire, recréez le BCD avec : (Commandes pour UEFI)
 		    1. `cd \d A:\EFI\Microsoft\Boot`
 			    - où A est la partition EFI
-		    2. Faites un sauvegarde du BCD: `ren BCD BCD.bak`
+		    2. Faites une sauvegarde du BCD: `ren BCD BCD.bak`
 		    3. `bcdboot C:\Windows /l fr-CA /s A: /f ALL`
-			    - Utilized les lettres assignez dans diskpart
-4. Relancez l'installation de Linux (Ubuntu ou autre).
+			    - Utilisez les lettres assignées dans diskpart
+4. Relancez l'installation de Linux.
 ### BitLocker
 1. Récupérez votre clé de récupération sur [Microsoft](https://account.microsoft.com/devices/recoverykey) – **IMPORTANT**
 2. Désactivez BitLocker *(Le déchiffrement peut prendre plusieurs heures selon la taille du disque - à faire à l'avance)*
 	- Exécutez dans Powershell comme Admin
 		- `Get-BitLockerVolume | foreach { Disable-BitLocker -MountPoint $_.MountPoint }`
 ### Internet
-- Si vous n'avez pas de connexion Ethernet, utilisez l'image complète de Debian DVD/USB ou Ubuntu.
+- Si vous n'avez pas de connexion Ethernet, utilisez l'image complète de Debian DVD/USB
     - Pour Debian, il peut être nécessaire de corriger le fichier *sources.list*
 - Wifi
-    - PEAP  
+    - PEAP
     - PAS de certificat CA
-    - utilisateur : `codems@ens.uqam.ca`
-    - mot de passe : `motdepasse`
+    - utilisateur : `codems@ens.uqam.ca` (remplacez par votre courriel UQAM)
+    - mot de passe : `votremotdepasse` (remplacez par votre mot de passe UQAM)
 ### Installation de Debian
 1. Sélectionnez "Graphical install" dans le menu de démarrage.
 2. Installez Debian en **français** pour faciliter les travaux pratiques.
@@ -117,19 +140,23 @@ Les Mac récents prennent en charge la virtualisation par défaut.
 Si vous ne souhaitez pas utiliser tout le disque ou si vous installez Debian aux côtés d’un autre système d’exploitation (dual boot), vous pouvez opter pour un partitionnement manuel.
 #### Schéma de partition
 
-| Mount Point  | Suggested Size   | File System   | Notes                                           |
-| ------------ | ---------------- | ------------- | ----------------------------------------------- |
-| `/boot/efi`  | 512MB - 1 GB     | FAT32         |                                                 |
-| `swap`       | 1-2 x RAM        | swap          | Utile pour l’hibernation                        |
-| `/` (racine) | 20-30 GB Minimum | ext4 or btrfs | Contient tout si /home est omis                 |
-| `/home`      | Reste du disque  | ext4 or btrfs | Optionnel, utile pour séparer les données perso |
+| Point de montage | Taille suggérée  | Système de fichiers | Notes                                                 |
+| ---------------- | ---------------- | ------------------- | ----------------------------------------------------- |
+| `/boot/efi`      | 512 Mo - 1 Go    | FAT32               |                                                       |
+| `swap`           | 1-2 x RAM        | swap                | Utile pour l'hibernation                              |
+| `/` (racine)     | 20-30 Go Minimum | ext4 ou btrfs       | Contient tout si /home est omis                       |
+| `/home`          | Reste du disque  | ext4 ou btrfs       | Optionnel, utile pour séparer les données utilisateur |
 - Vous pouvez tout mettre dans la partition `/` si vous préférez une configuration plus simple. 
 	- Avoir un `/home` séparé est pratique mais **pas obligatoire**. Cependant, cela peut créer des problèmes si la partition `/` vient à manquer d’espace. 
 #### Dual Boot
-- Redimensionnez vos partitions Windows **depuis Windows** avant d’installer Linux.
+- Réduisez votre partition Windows **avant** de démarrer l’installateur Debian avec la **Gestion des disques Windows** (`diskmgmt.msc`) : clic droit sur votre partition Windows -> *Réduire le volume*.
 - En dual boot, il est **recommandé d’installer Linux sur un disque séparé**.
 	- Dans ce cas, vous devez créer une **nouvelle partition EFI** sur ce disque.
-	- Si vous utilisez le même disque que Windows **redimensionnez la partition EFI existante à 1 Go** et **montez-la comme `/boot/efi`** lors de l’installation.
+	- Si vous utilisez le même disque que Windows, **ne créez pas de nouvelle partition EFI** — utilisez celle existante. **Redimensionnez-la à au moins 1 Go** au préalable avec [GParted](https://gparted.org/) (démarrable depuis une clé USB live), puis **montez-la comme `/boot/efi`** lors de l'installation.
+	- Avant de démarrer GParted pour redimensionner une partition, assurez-vous que Windows a libéré son verrou sur le système de fichiers NTFS :
+		1. **Désactiver le démarrage rapide** : Paramètres -> Système -> Alimentation et mise en veille -> Paramètres d'alimentation supplémentaires -> *Choisir l'action des boutons d'alimentation* -> décocher *Activer le démarrage rapide*
+		2. **Désactiver l'hibernation** (dans PowerShell en tant qu'administrateur) : `powercfg /h off`
+		3. **Éteindre Windows complètement** (pas redémarrer) avant de démarrer GParted — sinon la partition NTFS sera dans un état sale/verrouillé et GParted pourrait refuser de la redimensionner.
 ##### Guides recommandés
 - [Guide Debian pour le dual boot](https://wiki.debian.org/DualBoot/Windows) (anglais)
 - [Guide Arch pour le dual boot](https://wiki.archlinux.org/title/Dual_boot_with_Windows_(Fran%C3%A7ais)) (disponible en [anglais](https://wiki.archlinux.org/title/Dual_boot_with_Windows) et en français)
@@ -141,8 +168,10 @@ Si vous ne souhaitez pas utiliser tout le disque ou si vous installez Debian aux
 - Infos supplémentaires pour UQAM :
     - Utilisez `esquisse.ens.uqam.ca` au lieu de `Fresque.adm.gst.uqam.ca`
     - Installez `cups` et `smbclient` ou `samba`
+	- Activez CUPS : `sudo systemctl enable --now cups`
     - Téléchargez les [derniers pilotes Kyocera pour Linux](https://www.kyoceradocumentsolutions.us/content/download-center-americas/us/drivers/drivers/KyoceraLinuxPackages_20240521_tar_gz.download.gz)
-    - Exemple d'URL d'imprimante : `smb://CODEMS%40ens.uqam.ca:MOT_DE_PASSE_MS@esquisse.ens.uqam.ca/Impression_Mono_Kyocera`
+    - Exemple d'URL d'imprimante : `smb://CODEMS%40ens.uqam.ca:VOTRE_MDP_MS@esquisse.ens.uqam.ca/Impression_Mono_Kyocera`
+        - Remplacez `VOTRE_MDP_MS` par votre mot de passe Microsoft/AD
         - Remplacez `Mono` par `Couleur` si vous souhaitez imprimer en couleur    
 ### Debian root & sudo
 - Si vous avez défini un mot de passe pour `root`, votre utilisateur n’aura pas les droits sudo par défaut.
@@ -170,7 +199,7 @@ Pour une meilleure intégration VM (résolution, souris, etc.), installez les Ad
 2. Effacez `sources.list` en tant que sudo ou root:
    - `sudo rm /etc/apt/sources.list` ou
    - `su -l` et puis `rm /etc/apt/sources.list`
-3. Ajoutez un fichier `/etc/apt/sources.list.d/debian.sources` avec votre un éditeur de texte:
+3. Ajoutez un fichier `/etc/apt/sources.list.d/debian.sources` avec un éditeur de texte:
 
 ```sh
 Types: deb deb-src

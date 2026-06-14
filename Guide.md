@@ -32,6 +32,27 @@
 - [Further Reading](#further-reading)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
+### Where to Start
+
+```
+What are you setting up?
+├── Virtual Machine (VM) ──────────────────────────────────────────────────────┐
+│   ├── Windows host -> enable virtualization -> Prep › VM › Windows            │
+│   └── Mac host     -> use UTM (Apple Silicon) or VirtualBox -> Prep › VM › Mac│
+│                                                                              │
+│   Then jump straight to: Debian Installation -> Guest Additions               │
+│   (Skip Intel RST, BitLocker, and Custom Partitioning)                      │
+│                                                                              │
+└── Dual / Single Boot (installing directly on your machine) ─────────────────┘
+    ├── Windows machine?
+    │   ├── Check Intel RST  (NVMe/Optane users — skip if unsure, come back if install fails)
+    │   └── Disable BitLocker before shrinking your drive
+    │
+    ├── Prep › Dual/Single Boot  ->  Custom Partitioning  ->  Debian Installation
+    └── After install: Graphics Drivers (Nvidia users), Printers, Root & Sudo
+```
+
 ### Prep
 #### VM
 ##### Windows
@@ -47,15 +68,18 @@ Recent Macs support virtualization by default.
 - See this video guide: [Installation d’une MV pour les Mac Apple Silicon](https://ena01.uqam.ca/pluginfile.php/5473202/course/section/908922/InstallVMUbuntuAvecUTM.mp4), by Mélanie Lord (Fall 2024).
 - Instead of using VirtualBox, use [UTM](https://mac.getutm.app/).
 #### Dual/Single Boot
+- **This guide assumes a UEFI system**, which is standard on virtually all laptops sold in the last 10+ years. If your machine uses Legacy/CSM boot (older hardware), see the [Arch Wiki BIOS/CSM section](https://wiki.archlinux.org/title/Installation_guide#Boot_mode_(UEFI_vs._BIOS)) for differences.
 - Instead of installing Linux in a virtual machine, it is generally better to install it directly on your system (better performance overall). However, this is a bit more complex and carries a higher risk of data loss.  If you're not comfortable following installation steps on your own, it's recommended to use a virtual machine for now and/or attend the [Install Party](https://info.uqam.ca/linux/) organized by the computer science department for a guided setup.
-1. Préparation :
+1. **Preparation:**
 	- Make sure your hard drive/SSD has enough free space (at least 20–30 GB recommended for Linux).
-	-  Perform a full backup of your important files to avoid any accidental data loss.
-2. Distro Choice:
+	- Perform a full backup of your important files to avoid any accidental data loss.
+2. **Distro Choice:**
    - **Debian 13** is recommended for *INF1070*.
    - However, if your machine requires more recent drivers (e.g., gaming laptops or newer hardware), you may want to use a **rolling-release** (more recent but potentially less stable) or **semi-rolling** distribution such as: [_Debian Unstable_](https://wiki.debian.org/fr/DebianUnstable), [Arch Linux](https://archlinux.org/), [Manjaro](https://manjaro.org/), [Fedora](https://fedoraproject.org/), etc.
-1. **Create a bootable USB drive** using [Rufus](https://rufus.ie/en/) or a similar tool (e.g., Etcher for macOS/Linux).
+3. **Create a bootable USB drive** using [Rufus](https://rufus.ie/en/) or a similar tool (e.g., Etcher for macOS/Linux).
 ### Intel RST
+> **Warning:** The following steps involve editing the Windows registry and BIOS settings. If you are not comfortable doing this, bring your laptop to the [Install Party](https://info.uqam.ca/linux/) for guided help.
+
 - Intel RST (Rapid Storage Technology) is a proprietary RAID/SSD caching solution that causes major compatibility issues with Linux. It is **not supported** by kernel developers and **should be disabled**.
   - Not supported due to: 
 	  - No NVMe device power management
@@ -75,36 +99,38 @@ Recent Macs support virtualization by default.
 	5. Change value of 0 to 0
 	6. Navigate to `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\storahci\` and repeat steps 3-5
 	7. Reboot to BIOS and change to AHCI
-	8. If blue screen, navigate to Windows Recovery, CMD
-		1. Find Windows partition and boot partition and assign them a letter in diskpart
-		2. `bcdedit /deletevalue {default} safeboot`
-			1. If this doesn't work `bcdedit /deletevalue {current} safeboot` or `bcdedit /deletevalue safeboot`
-		3. Try rebooting. if it doesn't work, proceed to step 4
-		4. Recreate bcd file with `Bcdboot`
-			1. For UEFI
-				1. `cd \d A:\EFI\Microsoft\Boot`
-					-  A is letter I assigned to EFI partition (fat32)
-					-  this can vary BCD file could also be in `A:\Boot`
-				2. Backup BCD: `ren BCD BCD.bak`
-				3. `bcdboot c:\windows /l en-us /s a: /f ALL`
-					- Change lang with corresponding language. e.g, `fr-ca`
-					- use drive letters assigned in diskpart (c ->main windows partition and a-> efi - fat32 partition)
-4. Proceed with Ubuntu Install
+	8. **If you get a blue screen**, boot into Windows Recovery (CMD) and run the following:
+		1. Open `diskpart` and assign letters to your Windows and EFI partitions
+		2. Remove the safe boot flag:
+			```
+			bcdedit /deletevalue {default} safeboot
+			```
+			- If that fails, try `{current}` or omit the identifier entirely
+		3. Reboot. If Windows still won't boot, rebuild the BCD (UEFI only):
+			```
+			cd \d A:\EFI\Microsoft\Boot
+			ren BCD BCD.bak
+			bcdboot C:\Windows /l en-us /s A: /f ALL
+			```
+			- `A:` = EFI partition (FAT32), `C:` = Windows partition — use the letters you assigned in `diskpart`
+			- Replace `en-us` with your language code (e.g. `fr-ca`)
+			- If the BCD is at `A:\Boot` instead of `A:\EFI\Microsoft\Boot`, adjust the path accordingly
+4. Proceed with Linux install
 ### BitLocker
 1. Get Recovery Key from [Microsoft](https://account.microsoft.com/devices/recoverykey) - **IMPORTANT**
 2. Disable Bitlocker *(Decryption may take hours depending on drive size - best done ahead of time)*
 	- Run in Powershell as Admin: `Get-BitLockerVolume | foreach { Disable-BitLocker -MountPoint $_.MountPoint }`
 ### Internet
-- If no ethernet connection is available, use Debian DVD/usb full image or Ubuntu 
+- If no ethernet connection is available, use the Debian DVD/USB full image
 	- For Debian, may need to fix *sources.list*
 - Wifi
 	- PEAP
 	- NO CA Certificate
-	- user: `codems@ens.uqam.ca`
-	- pass: `motdepasse`
+	- user: `yourusername@ens.uqam.ca` (replace with your UQAM email)
+	- pass: `yourpassword` (replace with your UQAM password)
 ### Debian Installation
 1. Select "Graphical install" at the boot menu.
-2. Install Debian in **French** to make future course work easier.
+2. Install Debian in **French** to make future course work easier (all course materials and lab instructions are in French).
 3. You can leave "debian" as the machine name and leave the domain name blank.
 4. **Do not set a password for the root user**.  This ensures the first user created will have `sudo` privileges.
 5. (**For INF1070**) When prompted for full name, enter your actual name.  For the username, **you must** use your UQAM [permanent code](https://etudier.uqam.ca/code-permanent-uqam) in lowercase.  **Do not forget your password.**
@@ -124,10 +150,14 @@ If you don’t want to use the entire disk or if you’re installing Debian alon
 - You can put everything in `/` if you prefer a simpler setup. 
 	- Having a separate `/home` is useful but not required. However, it can cause issues if the `/` partition runs out of space.
 #### Dual Boot
-- Resize your Windows partitions from Windows before installing Linux.
+- Shrink your Windows partition **before** booting the Debian installer using **Windows Disk Management** (`diskmgmt.msc`): right-click your Windows partition -> *Shrink Volume*.
 - In a dual boot setup, it’s recommended to install Linux on a separate disk. 
 	- If you do so, you must create a new EFI partition on that disk.
-	- If using the same disk as Windows, **resize the existing EFI partition to 1 GB** and **mount it as `/boot/efi`** during installation.
+	- If using the same disk as Windows, **do not create a new EFI partition** — use the existing one. **Resize it to at least 1 GB** beforehand using [GParted](https://gparted.org/) (bootable from a live USB), then **mount it as `/boot/efi`** during installation.
+	- Before booting GParted to resize any partition, ensure Windows has released its lock on the NTFS filesystem:
+		1. **Disable Fast Startup**: Settings -> System -> Power & Sleep -> Additional power settings -> *Choose what the power buttons do* -> uncheck *Turn on fast startup*
+		2. **Disable Hibernation** (run in PowerShell as Admin): `powercfg /h off`
+		3. **Shut down Windows fully** (not restart) before booting GParted — otherwise the NTFS partition will be in a dirty/locked state and GParted may refuse to resize it.
 ##### Recommended Guides
 - [Debian Dual Boot Guide](https://wiki.debian.org/DualBoot/Windows) (English)
 - [Arch Dual Boot Guide](https://wiki.archlinux.org/title/Dual_boot_with_Windows) (Available in English and [French](https://wiki.archlinux.org/title/Dual_boot_with_Windows_(Fran%C3%A7ais)))  
@@ -139,9 +169,11 @@ If you don’t want to use the entire disk or if you’re installing Debian alon
 - Additional info for UQAM
 	- Use `esquisse.ens.uqam.ca` instead of `Fresque.adm.gst.uqam.ca`.
 	- Install `cups` and `smbclient` or `samba`.
+	- Enable CUPS: `sudo systemctl enable --now cups`
 	- Use the [latest Kyocera Linux drivers](https://www.kyoceradocumentsolutions.us/content/download-center-americas/us/drivers/drivers/KyoceraLinuxPackages_20240521_tar_gz.download.gz).
-	- Example Printer URL `smb://CODEMS%40ens.uqam.ca:MOT_DE_PASSE_MS@esquisse.ens.uqam.ca/Impression_Mono_Kyocera`
-		- Change `Mono` to `Couleur` if you want color printing
+- Example Printer URL: `smb://CODEMS%40ens.uqam.ca:YOUR_MS_PASSWORD@esquisse.ens.uqam.ca/Impression_Mono_Kyocera`
+	- Replace `YOUR_MS_PASSWORD` with your Microsoft/AD password
+	- Change `Mono` to `Couleur` if you want color printing
 ### Debian Root & Sudo
 - If you did set a password for `root`, your regular user won’t have sudo rights by default.
 ```sh
@@ -150,18 +182,18 @@ su -l # Log in as root
 apt update
 apt install sudo # May already be installed
 
-usermod -aG sudo nomUtilisateur
+usermod -aG sudo username
 ```
 ### Installation of Virtualbox Guest Additions (only on VM)
 To enhance VM integration (better resolution, mouse integration, etc.), install the VirtualBox Guest Additions.
 1. In the VirtualBox menu (VM window):
    - Peripherals -> Insert Guest Additions CD image...
-   - Le CD sera monté automatiquement dans Debian.
+   - The CD will be automatically mounted in Debian.
 2. Autorun will be proposed
-   - Cliquez sur Exécuter et entrez votre mot de passe quand demandé
+   - Click Run and enter your password when prompted
 ### Common Errors
 #### No Mirrors Available
-1. If you used the DVD image or didn’t select a mirror like deb.debian.org: .
+1. If you used the DVD image or didn’t select a mirror like deb.debian.org.
    - You may see an error like:
      - `The repository 'cdrom://[Debian GNU/Linux 13.0.0 ...] trixie Release' does not have a Release file.`
 2. Erase `sources.list` as sudo or root:
