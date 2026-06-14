@@ -38,19 +38,19 @@
 
 ```
 What are you setting up?
-├── Virtual Machine (VM) ──────────────────────────────────────────────────────┐
-│   ├── Windows host -> enable virtualization -> Prep › VM › Windows            │
-│   └── Mac host     -> use UTM (Apple Silicon) or VirtualBox -> Prep › VM › Mac│
-│                                                                              │
+├── Virtual Machine (VM) ───────────────────────────────────────────────────────┐
+│   ├── Windows host -> enable virtualization -> Prep > VM > Windows            │
+│   └── Mac host     -> use UTM (Apple Silicon) or VirtualBox -> Prep > VM > Mac│
+│                                                                               │
 │   Then jump straight to: Debian Installation -> Guest Additions               │
-│   (Skip Intel RST, BitLocker, and Custom Partitioning)                      │
-│                                                                              │
-└── Dual / Single Boot (installing directly on your machine) ─────────────────┘
+│   (Skip Intel RST, BitLocker, and Custom Partitioning)                        │
+│                                                                               │
+└── Dual / Single Boot (installing directly on your machine) ───────────────────┘
     ├── Windows machine?
-    │   ├── Check Intel RST  (NVMe/Optane users — skip if unsure, come back if install fails)
+    │   ├── Check Intel RST  (NVMe/Optane users: skip if unsure, come back if install fails)
     │   └── Disable BitLocker before shrinking your drive
     │
-    ├── Prep › Dual/Single Boot  ->  Custom Partitioning  ->  Debian Installation
+    ├── Prep > Dual/Single Boot  ->  Custom Partitioning  ->  Debian Installation
     └── After install: Graphics Drivers (Nvidia users), Printers, Root & Sudo
 ```
 

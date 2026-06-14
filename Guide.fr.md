@@ -37,19 +37,19 @@
 
 ```
 Qu'est-ce que vous installez ?
-├── Machine virtuelle (VM) ────────────────────────────────────────────────────┐
-│   ├── Hôte Windows -> activer la virtualisation -> Préparation › VM › Windows  │
-│   └── Hôte Mac     -> UTM (Apple Silicon) ou VirtualBox -> Préparation › VM › Mac│
-│                                                                              │
-│   Ensuite, allez directement à : Installation de Debian -> Additions invité  │
-│   (Ignorez Intel RST, BitLocker et le partitionnement personnalisé)         │
-│                                                                              │
-└── Dual Boot / installation unique (directement sur votre machine) ───────────┘
+├── Machine virtuelle (VM) ────────────────────────────────────────────────────────┐
+│   ├── Hôte Windows -> activer la virtualisation -> Préparation > VM > Windows    │
+│   └── Hôte Mac     -> UTM (Apple Silicon) ou VirtualBox -> Préparation > VM > Mac│
+│                                                                                  │
+│   Ensuite, allez directement à : Installation de Debian -> Additions invité      │
+│   (Ignorez Intel RST, BitLocker et le partitionnement personnalisé)              │
+│                                                                                  │
+└── Dual Boot / installation unique (directement sur votre machine) ───────────────┘
     ├── Machine Windows ?
-    │   ├── Vérifiez Intel RST  (utilisateurs NVMe/Optane — ignorez si incertain, revenez si l'install échoue)
+    │   ├── Vérifiez Intel RST  (utilisateurs NVMe/Optane; ignorez si incertain, revenez si l'install échoue)
     │   └── Désactivez BitLocker avant de réduire votre partition
     │
-    ├── Préparation › Dual Boot  ->  Partitionnement personnalisé  ->  Installation de Debian
+    ├── Préparation > Dual Boot  ->  Partitionnement personnalisé  ->  Installation de Debian
     └── Après l'installation : Pilotes graphiques (Nvidia), Imprimantes, root & sudo
 ```
 
