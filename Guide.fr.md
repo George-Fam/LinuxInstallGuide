@@ -28,6 +28,7 @@
   - [Dépendances Visual C++ VirtualBox](#d%C3%A9pendances-visual-c-virtualbox)
   - [Mauvais nom d'utilisateur](#mauvais-nom-dutilisateur)
   - [Problèmes de démarrage (Secure Boot)](#probl%C3%A8mes-de-d%C3%A9marrage-secure-boot)
+- [Pour aller plus loin](#pour-aller-plus-loin)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 ### Préparation

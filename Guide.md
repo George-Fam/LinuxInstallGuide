@@ -29,6 +29,7 @@
   - [VirtualBox Dependencies (Visual C++)](#virtualbox-dependencies-visual-c)
   - [Wrong Username](#wrong-username)
   - [Troubleshooting Boot Issues (Secure Boot)](#troubleshooting-boot-issues-secure-boot)
+- [Further Reading](#further-reading)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 ### Prep
