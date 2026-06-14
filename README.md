@@ -18,22 +18,25 @@ This guide was created to support the **Linux Install Party (Party d’installat
 
 ## Guides
 
-| Language | Link                              |
-| -------- | --------------------------------- |
-| English  | [`Guide (EN)`](./Guide.md)        |
-| French   | [`Guide (FR)`](./Guide.fr.md)     |
+| Language | Link                          |
+| -------- | ----------------------------- |
+| English  | [`Guide (EN)`](./Guide.md)    |
+| French   | [`Guide (FR)`](./Guide.fr.md) |
 
 ## Before You Start
 
 Make sure you:
+
 - Back up your important data
 - Have at least **20–30 GB of free space**
 - Bring your **UQAM permanent code** and **Wi-Fi credentials** if on campus
-- **Disable BitLocker** on Windows if it's enabled - this is necessary for dual boot setups.  *(See the [Guide](./Guide.md#bitlocker) for instructions.)*
+- **Disable BitLocker** on Windows if it's enabled - this is necessary for dual boot setups. _(See the [Guide](./Guide.md#bitlocker) for instructions.)_
 
 If unsure, attend the [Install Party](https://info.uqam.ca/linux/) for guided assistance!
+
 ## Contributing & Credits
 
 Special thanks to:
+
 - Mélanie Lord for the Mac virtualization video
 - [Ryan Kavanagh](https://rak.ac) for the UQAM printer setup guide and Debian Install Steps
