@@ -28,6 +28,7 @@
   - [Dépendances Visual C++ VirtualBox](#d%C3%A9pendances-visual-c-virtualbox)
   - [Mauvais nom d'utilisateur](#mauvais-nom-dutilisateur)
   - [Problèmes de démarrage (Secure Boot)](#probl%C3%A8mes-de-d%C3%A9marrage-secure-boot)
+- [Pour aller plus loin](#pour-aller-plus-loin)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 ### Préparation
@@ -208,3 +209,8 @@ sudo usermod -aG sudo nomUtilisateur
 ```
 #### Problèmes de démarrage (Secure Boot)
 - **Bloqué au démarrage après l'installation** : désactivez Secure Boot dans le BIOS si Linux ne démarre pas correctement.
+
+### Pour aller plus loin
+- **[The Linux Desktop Guide](https://thelinuxbook.com)** de Chris Titus
+  - Un guide pratique couvrant des sujets de bureau Linux que la plupart des guides d’installation ne traitent pas : utilisation du terminal, réseau, audio, bluetooth, disques, jeux, configuration de l’environnement, etc. Pas une lecture obligatoire, mais une excellente ressource si vous voulez aller au-delà de l’installation et apprendre vraiment à utiliser votre bureau Linux au quotidien. 
+  - Pas trop détaillé; le [Arch Wiki](https://wiki.archlinux.org/) reste votre meilleur ami pour des références en profondeur.

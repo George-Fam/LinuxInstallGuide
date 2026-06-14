@@ -29,6 +29,7 @@
   - [VirtualBox Dependencies (Visual C++)](#virtualbox-dependencies-visual-c)
   - [Wrong Username](#wrong-username)
   - [Troubleshooting Boot Issues (Secure Boot)](#troubleshooting-boot-issues-secure-boot)
+- [Further Reading](#further-reading)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 ### Prep
@@ -205,3 +206,9 @@ sudo usermod -aG sudo username
 ```
 #### Troubleshooting Boot Issues (Secure Boot)
 - **Stuck at boot after install**:  Try disabling Secure Boot in BIOS if your Linux doesn’t boot properly after installation.
+
+### Further Reading
+
+- **[The Linux Desktop Guide](https://thelinuxbook.com)** by Chris Titus.
+  - A practical guide covering desktop Linux topics that most installation guides don’t touch: terminal usage, networking, audio, bluetooth, drives, gaming, environment setup, and more. Not required reading, but a great resource if you want to go beyond installation and really learn how to use your Linux desktop day-to-day.
+  - Not overly detailed; the [Arch Wiki](https://wiki.archlinux.org/) remains your best friend for in-depth references.
